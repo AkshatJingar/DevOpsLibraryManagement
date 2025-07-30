@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-book"></i> Book Management System</h1>
+        </header>
+
+        <div class="main-content">
+            <!-- Add Book Form -->
+            <div class="form-section">
+                <h2><i class="fas fa-plus-circle"></i> Add New Book</h2>
+                <form id="addBookForm" class="book-form">
+                    <div class="form-group">
+                        <label for="title">Title:</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author:</label>
+                        <input type="text" id="author" name="author" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="isbn">ISBN:</label>
+                        <input type="text" id="isbn" name="isbn" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="available">Available:</label>
+                        <select id="available" name="available">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Book
+                    </button>
+                </form>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="search-section">
+                <h2><i class="fas fa-search"></i> Search & Filter</h2>
+                <div class="search-controls">
+                    <input type="text" id="searchInput" placeholder="Search by title, author, or ISBN...">
+                    <select id="filterAvailable">
+                        <option value="">All Books</option>
+                        <option value="true">Available Only</option>
+                        <option value="false">Unavailable Only</option>
+                    </select>
+                    <button id="clearFilters" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Clear Filters
+                    </button>
+                </div>
+            </div>
+
+            <!-- Books List -->
+            <div class="books-section">
+                <h2><i class="fas fa-list"></i> Books List</h2>
+                <div id="booksList" class="books-grid">
+                    <!-- Books will be loaded here -->
+                </div>
+                <div id="loadingMessage" class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Loading books...
+                </div>
+                <div id="noBooksMessage" class="no-books" style="display: none;">
+                    <i class="fas fa-book-open"></i> No books found
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Book Modal -->
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2><i class="fas fa-edit"></i> Edit Book</h2>
+                <form id="editBookForm" class="book-form">
+                    <input type="hidden" id="editId">
+                    <div class="form-group">
+                        <label for="editTitle">Title:</label>
+                        <input type="text" id="editTitle" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editAuthor">Author:</label>
+                        <input type="text" id="editAuthor" name="author" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editIsbn">ISBN:</label>
+                        <input type="text" id="editIsbn" name="isbn" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editAvailable">Available:</label>
+                        <select id="editAvailable" name="available">
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeEditModal()">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Delete Confirmation Modal -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <h2><i class="fas fa-exclamation-triangle"></i> Confirm Delete</h2>
+                <p>Are you sure you want to delete "<span id="deleteBookTitle"></span>"?</p>
+                <p>This action cannot be undone.</p>
+                <div class="form-actions">
+                    <button id="confirmDelete" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                    <button onclick="closeDeleteModal()" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
