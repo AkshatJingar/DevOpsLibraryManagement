@@ -15,6 +15,10 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'gui')));
+
+
 let books = [
   { id: 1, title: "Atomic Habits", author: "James Clear", isbn: "9780061122415", available: true },
   { id: 2, title: "ABC", author: "XYZ", isbn: "9780451524935", available: false }
@@ -73,4 +77,8 @@ app.delete('/api/books/:id', (req, res) => {
 const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Library service is running on port ${PORT}`);
+});
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'gui', 'index.html'));
 });
